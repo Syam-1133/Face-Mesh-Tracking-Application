@@ -5,7 +5,7 @@ import yaml
 
 class HandFaceMeshApp:
     def __init__(self, config_path):
-        # Load configuration
+
         with open(config_path, 'r') as file:
             self.config = yaml.safe_load(file)
 
@@ -24,13 +24,13 @@ class HandFaceMeshApp:
             min_detection_confidence=self.config['face_min_detection_confidence'],
             min_tracking_confidence=self.config['face_min_tracking_confidence'])
 
-        # Drawing specifications
+
         self.hand_drawing_spec = self.mp_drawing.DrawingSpec(color=(0, 255, 0), thickness=2, circle_radius=3)
         self.face_drawing_spec = self.mp_drawing.DrawingSpec(color=(255, 0, 0), thickness=2, circle_radius=5)
 
     def process_frame(self, image):
-        image = cv2.flip(image, 1)  # Flip for selfie-view
-        rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # Convert to RGB
+        image = cv2.flip(image, 1)
+        rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 
         hand_results = self.hands.process(rgb_image)
@@ -62,7 +62,7 @@ class HandFaceMeshApp:
 
     def draw_face_landmarks(self, image, face_results):
 
-        h, w, _ = image.shape  # Get frame dimensions
+        h, w, _ = image.shape
 
         offset_x = 500
 
